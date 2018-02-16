@@ -1,7 +1,6 @@
-# OpenCV-and-Tensorflow-Facial-Detection-
-For those interested in getting started with Googles Tensorflow, Deep/Machine Learning, and Object Detection and Tracking.
-
 # Facial Detection "SnapChat Mimic"
+
+For those interested in getting started with Googles Tensorflow, Deep/Machine Learning, and Object Detection and Tracking.
 
 This is a simple Python program using OpenCV (https://opencv.org) made to mimic the snapchats
 filter idea, using facial detection and tracking and Haar Cascades.
