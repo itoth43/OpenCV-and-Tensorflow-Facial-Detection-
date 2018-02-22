@@ -65,7 +65,7 @@ The necessary files for this example are available in this repo, including:
 - Mask Images
 - Python Code
 
-### Understanding the Code
+### Understanding the Masking Process (from the code)
 
 ```
 # ------   Load the haarcascades   ------ #
@@ -75,8 +75,42 @@ face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 nose_cascade = cv2.CascadeClassifier('haarcascade_mcs_nose.xml')
 ```
 
-This is the section where the object of 
+Here we will build the Haar cascade classifier for the face and nose. 
 
+```
+# ------   Prepare the image   ------ #
+
+## Load our overlay image/ Uncomment any of them to try it out (or write in your own)
+imgMask = cv2.imread('mario_face.png', -1)
+
+```
+
+We load the image with -1 (negative one) as the second parameter to load all the layers in the image. 
+  - The image is made up of 4 layers (or channels): Blue, Green, Red, and an Alpha transparency layer (knows as BGR-A). The alpha channel is made up of a combination of the other 3 layers.
+```
+
+## Create the mask for the img
+orig_mask = imgMask[:,:,3]
+```
+
+Now we take the alpha layer and create a new single-layer image that we will use for masking.
+```
+
+## Create the inverted mask for the img
+orig_mask_inv = cv2.bitwise_not(orig_mask)
+```
+
+Take the inverse of our mask. The initial mask will define the area for the image, and the inverse mask will be for the region around the image.
+```
+
+## Convert image to BGR and save the original image size (used later when re-sizing the image)
+imgMask = imgMask[:,:,0:3]
+origImgHeight, origImgWidth = imgMask.shape[:2]
+```
+
+Here we convert the image to a 3-channel BGR image (BGR rather than BGR-A is required when we overlay the image over the webcam image later). Then Save the original image sizes, which we will use later when re-sizing the mustache image.  
+  
+If you have more questions, please see References
 ### Running the code (web cam required)
 
 From your terminal, move to the directory that your code and files are stored in. 
@@ -86,10 +120,24 @@ Once in your directory
 
 ## Continuing the Journey with Tensorflow
 
-If you want to continue your journey in object detection and maybe learn about object recognition, here is how you can start using tensorflow (https://www.tensorflow.org/install/) 
+Security Example (Using a faster model, but compromises accuracy for speed): 
+
+<img src="https://github.com/itoth43/OpenCV-and-Tensorflow-Facial-Detection-/blob/master/security_Example.jpg" alt="Security Human Recognition and Detection" width="300"/>
+
+Human Counting Example (Using a slower model, but compromises speed for accuracy):
+
+<img src="https://github.com/itoth43/OpenCV-and-Tensorflow-Facial-Detection-/blob/master/headCount_Example.jpg" alt="Human Counting. Recognition and Detection" width="300"/>
+
+If you want to continue your journey in object detection and learn about object recognition, 
+
+here is a great site for tutorials using tensorflow and object detection: (https://pythonprogramming.net) that help me when I first started with Tensorflow
 
 ## Authors
 
 * **Isaiah Toth**
 
-A Software Consultant/Engineer and Clemson University Graduate 2018.
+A Clemson University Graduate 2018 and Software Consultant/Engineer.
+
+## References
+
+https://sublimerobots.com/2015/02/dancing-mustaches/
