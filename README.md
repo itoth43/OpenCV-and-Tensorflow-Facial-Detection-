@@ -138,7 +138,7 @@ here is a great site for tutorials using tensorflow and object detection: (https
 
 A Clemson University Graduate 2018 and Software Consultant/Engineer.
 
-## References
+## References and Resources for further learning
 
 https://sublimerobots.com/2015/02/dancing-mustaches/
 
